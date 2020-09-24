@@ -10,10 +10,24 @@ const puppeteer = require('puppeteer');
 (async () => {
 	const browser = await puppeteer.launch({ headless: false });
 	const page = await browser.newPage();
-	await page.goto('http://192.168.43.88:8000/#/claim');
-	await page.focus('#autoencoder');
-	// await page.keyboard.type('admin');
-	// await page.focus('password');
-	// await page.keyboard.type('123456');
-	await page.type('#autoencoder', 'puppeteer');
+	await page.setViewport({ width: 1280, height: 800 });
+	await page.goto('http://localhost:9527');
+	await page.focus('#count');
+	await page.type('#count', 'admin');
+	await page.type('#password', '123456');
+	await page.click('#login-btn');
+	await page.waitForNavigation();
+	console.log('btn');
+	await page.goto('http://localhost:9527/#/marketing/activityManagement');
+	// await page.waitForNavigation();
+	// await page.waitForTimeout(2000);
+
+	try {
+		console.log('11');
+		const btn = await page.waitForSelector('#adda');
+		console.log('oooo', btn);
+		await btn.click();
+	} catch (err) {
+		console.log('err', err);
+	}
 })();
