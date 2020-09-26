@@ -21,7 +21,6 @@ const puppeteer = require('puppeteer');
 	await page.goto('http://localhost:9527/#/marketing/activityManagement');
 	// await page.waitForNavigation();
 	// await page.waitForTimeout(2000);
-
 	try {
 		console.log('11');
 		const btn = await page.waitForSelector('#adda');
@@ -30,4 +29,11 @@ const puppeteer = require('puppeteer');
 	} catch (err) {
 		console.log('err', err);
 	}
+	await page.screenshot({
+		path: 'full.png',
+		fullPage: true,
+	});
+	// await page.tracing.start({ path: 'trace.json' });
+	// await page.goto('https://www.baidu.com');
+	// await page.tracing.stop();
 })();
